@@ -1,8 +1,16 @@
 // your code here
-document.getElementById("button").addEventListner("click",()=>{
-	const name = getElementById("name").value.trim();
-	const year = getElementById("year").value.trim();
+document.getElementById("button").addEventListener("click",()=>{
+	const name = document.getElementById("name").value.trim();
+	const year = document.getElementById("year").value.trim();
 	const base = "https://localhost:8080/";
-	const query = `?name=${encodeURIComponent(name)}&year=${encodeURIComponent(year)}`;
-	document.getElementById("url").textContent = base+query;
+
+	 const params = new URLSearchParams();
+
+  if (name) params.append("name", name);
+  if (year) params.append("year", year);
+
+  const finalURL = params.toString()
+    ? base + "?" + params.toString()
+    : base;
+	document.getElementById("url").textContent = finalURL;
 });
